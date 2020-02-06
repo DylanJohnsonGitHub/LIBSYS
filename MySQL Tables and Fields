@@ -17,3 +17,18 @@ comments denoted <> comment <>
 #                                         <>  Used to ensure no more copies can be checked out than are available <>
 #                                                           #
 #-----------------------------------------------------------#
+
+#------------------------- members -------------------------#
+#                                                           #
+#             id          INT             <> Unique integer to identify the member <>
+#                                         <>  Primary key of members <>
+#             username    VARCHAR(40)     <> Username of the member <>
+#                                         <>  Generally just the member's first and last name <>
+#             member_end  INT             <> Date of membership termination <>
+#                                         <>  Represented as the number of days since 1970 <>
+#             dues        DOUBLE          <> Combined library dues owed by the member <>
+#                                         <>  Calculation method TBD <>
+#             email       VARCHAR(60)     <> E-mail of member <>
+#                                         <>  Mainly used to notify the member of due dates and fines, send receipts, etc. <>
+#                                                           #
+#-----------------------------------------------------------#
