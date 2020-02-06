@@ -1,0 +1,19 @@
+
+comments denoted <> comment <>
+
+/------------ LIBSYS standard Tables and Fields ------------/
+
+#-------------------------- books --------------------------#
+#                                                           #
+#             ISBN      VARCHAR(13)       <> ISBN of the book <>
+#                                         <>  Assumes ISBN-13 for all books, formatted simply as the 13 digits as a string <>
+#             title     VARCHAR(6000)     <> Title of the book <>
+#                                         <>  Largest title in the world is 5000 characters, so this is technically overkill <>
+#             author    VARCHAR(500)      <> Author of the book <>
+#                                         <>  Room for any name under the sun, as well as multiple authors <>
+#             copies    INT               <> Total number of copies of this book owned by the library <>
+#                                         <>  Mainly used to ensure the librarian  doesn't return more books than exist <>
+#             checked   INT               <> Total number of copies checked out by readers <>
+#                                         <>  Used to ensure no more copies can be checked out than are available <>
+#                                                           #
+#-----------------------------------------------------------#
