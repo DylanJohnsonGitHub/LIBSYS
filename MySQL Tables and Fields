@@ -24,8 +24,9 @@ comments denoted <> comment <>
 #                                         <>  Primary key of members <>
 #             username    VARCHAR(40)     <> Username of the member <>
 #                                         <>  Generally just the member's first and last name <>
-#             member_end  INT             <> Date of membership termination <>
-#                                         <>  Represented as the number of days since 1970 <>
+#             member_end  CHAR(16)        <> Date of membership termination <>
+#                                         <>  Expressed as a string with the format "E, MMM dd yyyy" <>
+#                                         <>  Decoded using LocalDate.parse() with a DateTimeFormatter <>
 #             dues        DOUBLE          <> Combined library dues owed by the member <>
 #                                         <>  Calculation method TBD <>
 #             email       VARCHAR(60)     <> E-mail of member <>
