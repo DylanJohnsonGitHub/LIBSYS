@@ -33,3 +33,16 @@ comments denoted <> comment <>
 #                                         <>  Mainly used to notify the member of due dates and fines, send receipts, etc. <>
 #                                                           #
 #-----------------------------------------------------------#
+
+#------------------------ checkouts ------------------------#
+#                                                           #
+#             ISBN      VARCHAR(13)       <> ISBN of the book checked out <>
+#                                         <>  Assumes ISBN-13 for all books, formatted simply as the 13 digits as a string <>
+#             reader_id INT               <> ID of the reader who checked the book out <>
+#                                         <>  used for accountability <>
+#             due_date  CHAR(16)          <> Date the book is meant to be returned or renewed by <>
+#                                         <>  can be updated once by renewal <>
+#             renewed   BOOLEAN           <> Has the book been renewed once? <>
+#                                         <>  Only one renewal allowed per checkout <>
+#                                                           #
+#-----------------------------------------------------------#
