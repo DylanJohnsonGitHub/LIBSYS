@@ -22,14 +22,14 @@ comments denoted <> comment <>
 #                                                           #
 #             id          INT             <> Unique integer to identify the member <>
 #                                         <>  Primary key of members <>
-#             username    VARCHAR(40)     <> Username of the member <>
+#             username    VARCHAR(100)    <> Username of the member <>
 #                                         <>  Generally just the member's first and last name <>
-#             member_end  CHAR(16)        <> Date of membership termination <>
-#                                         <>  Expressed as a string with the format "E, MMM dd yyyy" <>
+#             membership_end  DATE        <> Date of membership termination <>
+#                                         <>  format is YYYY-MM-DD <>
 #                                         <>  Decoded using LocalDate.parse() with a DateTimeFormatter <>
 #             dues        DOUBLE          <> Combined library dues owed by the member <>
 #                                         <>  Calculation method TBD <>
-#             email       VARCHAR(60)     <> E-mail of member <>
+#             email       VARCHAR(200)    <> E-mail of member <>
 #                                         <>  Mainly used to notify the member of due dates and fines, send receipts, etc. <>
 #                                                           #
 #-----------------------------------------------------------#
