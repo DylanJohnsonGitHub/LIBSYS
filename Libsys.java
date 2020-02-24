@@ -23,6 +23,7 @@ public class Libsys {
 		
 		
 	//-----------------------SQL Stuff----------------------------------//
+	/*	
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 					
@@ -32,7 +33,8 @@ public class Libsys {
 			//while(rs.next())  
 				//System.out.println(rs.getString(1)+" | "+rs.getString(2)+" | "+rs.getString(3));
 		}catch(Exception e){ System.out.println(e);}
-	//------------------------------------------------------------------//
+	*/
+	//------------------------------------------------------------------/
 		//initialize array of JPanels for display on GUI
 		JPanel[] panelArray = new JPanel[10];
 		JPanel emptyPanel = new JPanel();
@@ -162,7 +164,9 @@ public class Libsys {
 		userNameText.setEditable(false);
 		
 		JLabel userEmail = new JLabel("Email: ");
-		JTextField userEmailText = new JTextField(15);
+		
+		JTextField userEmailText = new JTextField(25);
+		
 		userEmailText.setEditable(false);
 		
 		JLabel returnDate = new JLabel("RETURN DATE: ");
@@ -312,7 +316,7 @@ public class Libsys {
 					
 					});
 				
-		//gives action to "Search ISBN" button
+		//gives action to "Search User" button
 				userIDButton.addActionListener(new ActionListener() {
 					
 						public void actionPerformed(ActionEvent e) {
@@ -323,7 +327,21 @@ public class Libsys {
 							System.out.println(memberID);
 							
 							//PLACE QUERY CODE HERE
-							
+							try {
+								Class.forName("com.mysql.cj.jdbc.Driver");
+										
+								Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/libsys","root","CSC331");   
+								Statement stmt=con.createStatement();  
+								String queryStatement = "select * from readers where id_number = " + memberID;
+								ResultSet rs=stmt.executeQuery(queryStatement);  
+								while(rs.next()){
+									String hello = (rs.getString("id_number"));
+									String goodbye = (rs.getString("name"));
+									String maybe = (rs.getString("email"));
+									userNameText.setText(goodbye);
+									userEmailText.setText(maybe);
+								}
+							}catch(Exception a){ System.out.println(a);}
 						}
 					
 					});
