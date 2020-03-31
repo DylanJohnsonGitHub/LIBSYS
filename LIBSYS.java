@@ -36,6 +36,10 @@ public class LIBSYS {
 		
 	}
 	
+	public int getLocalBooksLength() {
+		return localBooks.size();
+	}
+	
 	// Commits changes made to the database
 	private void commit() {
 		try {
@@ -72,8 +76,8 @@ public class LIBSYS {
 	public boolean getBooksFromDB(String isbn, String title, String author) {
 		try {
 			ResultSet books = statementManager.executeQuery(BookQueries.getBooks(isbn, title, author));
+			localBooks.clear();
 			if (books.next()) {
-				localBooks.clear();
 				do {
 					currentBook = new Book(
 							books.getString("ISBN"), 
@@ -127,10 +131,24 @@ public class LIBSYS {
 	}
 	
 	// Return a string of all the books collected from the database
-	public String printBooks() {
-		String temp = "";
-		for (int i = 0; i < localBooks.size(); i++)
-			temp += localBooks.get(i).print();
+	public String[] printBooks() {
+		String temp[] = new String[localBooks.size()];
+		int i = 0;
+		for (Book book : localBooks)
+			temp[i++] = printBookHTMLFormat(book);
+		return temp;
+	}
+	
+	private String printBookHTMLFormat(Book bookToPrint) {
+		String temp = "<html>"
+				+"-----------------------------------------------"
+				+"<br>&emsp;ISBN:&emsp;"  + bookToPrint.getISBN()
+				+"<br>&emsp;Title:&emsp;" + bookToPrint.getTitle()
+				+"<br>&emsp;Author:&emsp;" + bookToPrint.getAuthor()
+				+"<br>&emsp;Copies:&emsp;" + bookToPrint.getCopies()
+				+"<br>&emsp;Copies Available:&emsp;" + (bookToPrint.getCopies()-bookToPrint.getCheckedOut())
+				+"<br>-----------------------------------------------"
+				+"</span></html>";
 		return temp;
 	}
 	
@@ -145,7 +163,7 @@ public class LIBSYS {
 	public String printMember() {
 		String temp = currentMember.getName() + '\n';
 		temp += currentMember.getEmail() + '\n';
-		return temp + currentMember.formatDate();
+		return temp + currentMember.readableDate();
 	}
 	
 	// Print all the checkouts collected from the database
@@ -228,15 +246,22 @@ public class LIBSYS {
 	}
 	
 	// Find and set currently selected book from the local books using the given ISBN
-	public boolean selectBookFromLocal(String ISBN) {
-		for (Book book : localBooks) 
-		{
-			if (ISBN == book.getISBN()) {
-				currentBook = new Book(book);
-				return true;
-			}
+	public boolean selectBookFromLocal(int index) {
+		if(localBooks.size() > 0) {
+			currentBook = localBooks.get(index);
+			return true;
 		}
 		return false;
+	}
+	
+	public String[] getCurrentBookInfo() {
+		String temp[] = new String[5];
+		temp[0] = currentBook.getISBN();
+		temp[1] = currentBook.getTitle();
+		temp[2] = currentBook.getAuthor();
+		temp[3] = ""+currentBook.getCopies();
+		temp[4] = ""+(currentBook.getCopies()-currentBook.getCheckedOut());
+		return temp;
 	}
 	
 	// Set the currently selected member to one in the list with the given user ID
