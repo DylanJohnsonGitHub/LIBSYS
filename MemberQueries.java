@@ -9,7 +9,22 @@ public class MemberQueries {
 	
 	public static String getMembers(int id) {return "SELECT * FROM members WHERE ID = "+ id + " ORDER BY username";}
 	
-	public static String getMembers(String username) {return "SELECT * FROM members WHERE username LIKE '%"+username+"%' ORDER BY username LIMIT "+RESULT_LIMIT;}
+	public static String getMembers(String id, String name, String email) {
+		String query = "SELECT * FROM members WHERE ";
+		String andStr = "";
+		if (!id.isEmpty()) {
+			query += "ID = "+id;
+			andStr = " AND ";
+		}
+		if (!name.isEmpty()) {
+			query += andStr+"username LIKE '%"+name+"%'";
+			andStr = " AND ";
+		}
+		if (!email.isEmpty()) {
+			query += andStr+"email LIKE '%"+email+"%'";
+		}
+		return query+" ORDER BY username LIMIT "+RESULT_LIMIT;
+		}
 	
 	public static String getMembers() {return "SELECT * FROM members LIMIT "+RESULT_LIMIT;}
 	
