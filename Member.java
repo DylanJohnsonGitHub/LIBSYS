@@ -87,6 +87,11 @@ public class Member {
 		return endMembership.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 	
+	// Formats the date into a user-friendly format
+		public String readableDate() {
+			return endMembership.format(DateTimeFormatter.ofPattern("E, MMM dd yyyy"));
+		}
+	
 	// Updates the end of membership to the current date plus 3 years
 	public void updateEndOfMembership() {endMembership = LocalDate.now().plusYears(3);}
 	
